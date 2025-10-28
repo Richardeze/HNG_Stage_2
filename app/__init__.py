@@ -11,8 +11,15 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
-    db_path = os.path.join(app.instance_path, "countries.db")
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
+    try:
+        os.makedirs(app.instance_path, exist_ok=True)
+    except OSError:
+        pass
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+        "SQLALCHEMY_DATABASE_URI",
+        f"sqlite:///{os.path.join(app.instance_path, 'countries.db')}"
+    )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
     migrate.init_app(app, db)
