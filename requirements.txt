@@ -6,3 +6,4 @@ pymysql
 requests
 pillow
 matplotlib
+gunicorn
