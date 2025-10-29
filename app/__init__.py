@@ -27,4 +27,11 @@ def create_app():
     from app.routes import main
     app.register_blueprint(main)
 
+    @app.cli.command("init-db")
+    def init_db():
+        """Create database tables."""
+        with app.app_context():
+            db.create_all()
+            print("✅ Database tables created successfully!")
+
     return app
