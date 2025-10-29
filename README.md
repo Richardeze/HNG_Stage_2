@@ -55,6 +55,6 @@ python main.py
 
 ## Live API URL
 You can access the deployed API here:  
-
+web-production-1996b.up.railway.app
 
 
