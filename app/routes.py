@@ -19,6 +19,11 @@ def home():
         "message": "Welcome to the HNG Stage 2 Country Currency & Exchange API!"
     }), 200
 
+@main.route("/init-db")
+def init_db():
+    db.create_all()
+    return {"message": "Database initialized successfully!"}
+
 @main.route("/countries/refresh", methods=["POST"])
 def refresh_countries():
     try:
