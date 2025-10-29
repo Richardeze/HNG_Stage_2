@@ -86,7 +86,7 @@ def refresh_countries():
                 )
                 db.session.add(new_country)
         db.session.commit()
-        os.makedirs("cache", exist_ok=True)
+        os.makedirs(os.path.join(os.getcwd(), "cache"), exist_ok=True)
         generate_summary_image()
 
         total = Country.query.count()
@@ -191,7 +191,8 @@ def get_status():
 
 @main.route("/countries/image", methods=["GET"])
 def get_countries_image():
-    image_path = os.path.join("cache", "summary.png")
+    cache_dir = os.path.join(os.getcwd(), "cache")
+    image_path = os.path.join(cache_dir, "summary.png")
 
     if not os.path.exists(image_path):
         return jsonify({
