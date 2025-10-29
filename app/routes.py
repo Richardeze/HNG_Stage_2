@@ -24,7 +24,7 @@ def init_db():
     db.create_all()
     return {"message": "Database initialized successfully!"}
 
-@main.route("/countries/refresh", methods=["POST"])
+@main.route("/countries/refresh", methods=["GET", "POST"])
 def refresh_countries():
     try:
         countries_res = requests.get(COUNTRIES_API, timeout=10)
